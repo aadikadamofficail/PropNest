@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PropNest – Smart Property Marketplace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f2f4f7;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(90deg, #0d47a1, #1976d2);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideDown 1s ease;
+        }
+        @keyframes slideDown {
+            from {transform: translateY(-50px); opacity:0;}
+            to {transform: translateY(0); opacity:1;}
+        }
+        nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .hero {
+            padding: 70px 40px;
+            background: url('https://images.unsplash.com/photo-1568605114967-8130f3a36994') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            animation: fadeIn 2s ease;
+        }
+        @keyframes fadeIn {
+            from {opacity:0;} to {opacity:1;}
+        }
+        .hero h2 { font-size: 40px; }
+        .hero p { font-size: 18px; }
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            animation: popUp 1s ease;
+        }
+        @keyframes popUp {
+            from {transform: scale(0.9); opacity:0;}
+            to {transform: scale(1); opacity:1;}
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background:#0d47a1; }
+        .plans {
+            margin-top: 50px;
+            position: relative;
+            filter: blur(6px);
+            pointer-events: none;
+        }
+        .coming {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(13,71,161,0.95);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-size: 22px;
+            z-index: 10;
+        }
+        .plan {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom:20px;
+            text-align: center;
+        }
+        footer {
+            background: #0d47a1;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 60px;
+        }
+    .float-btn{
+position:fixed;bottom:30px;right:30px;background:#1976d2;color:#fff;padding:15px 20px;border-radius:50px;text-decoration:none;font-size:16px;box-shadow:0 6px 15px rgba(0,0,0,0.3);z-index:1000;}
+.whatsapp{
+position:fixed;bottom:90px;right:30px;background:#25d366;color:#fff;padding:15px;border-radius:50%;font-size:22px;text-decoration:none;z-index:1000;}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>PropNest</h1>
+    <nav>
+        <a href="#">Buy</a>
+        <a href="#">Rent</a>
+        <a href="#">Post Property</a>
+        <a href="#">Subscriptions</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>India’s Smarter Way to Buy, Sell & Rent Property</h2>
+    <p>List once. Reach thousands. Sell or rent faster with PropNest.</p>
+</section>
+
+<section class="features" style="background:#fff;padding:50px 40px;">
+    <h2 style="text-align:center;color:#0d47a1;">Why Choose PropNest?</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:30px;">
+        <div class="card">🏠 Trusted property listings</div>
+        <div class="card">⚡ Faster rent & sell process</div>
+        <div class="card">📍 Location-based discovery</div>
+        <div class="card">💬 Priority customer support</div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="card">
+        <h3>Post Your Property</h3>
+
+        <div class="upload-box">
+            <label>📸 Upload Property Photo</label>
+            <input type="file" accept="image/*" id="photo">
+        </div>
+
+        <input type="text" id="owner" placeholder="Owner Name">
+        <input type="text" id="propertyType" placeholder="Property Type (Flat / Villa / Plot)">
+
+        <div class="location-bar">
+            <span>📍</span>
+            <input type="text" id="location" placeholder="Enter Property Location (City / Area)">
+        </div>
+
+        <select id="purpose">
+            <option value="">Select Purpose</option>
+            <option value="Rent">Rent</option>
+            <option value="Sell">Sell</option>
+        </select>
+        <select id="plan">
+            <option value="">Choose Subscription</option>
+            <option value="Red">Red (Free)</option>
+            <option value="Silver">Silver – ₹300</option>
+            <option value="Gold">Gold – ₹700</option>
+        </select>
+        <button onclick="submitProperty()">🚀 List Property</button>
+
+        <div id="output" class="output"></div>
+    </div>
+    </div>
+
+    <div style="position:relative;">
+        <div class="plans">
+            <div class="plan">
+                <h4>Red</h4>
+                <p>Free Listing</p>
+            </div>
+            <div class="plan">
+                <h4>Silver</h4>
+                <p>₹300</p>
+            </div>
+            <div class="plan">
+                <h4>Gold</h4>
+                <p>₹700</p>
+            </div>
+        </div>
+        <div class="coming">🚀 Subscriptions Coming Soon</div>
+    </div>
+</div>
+</div>
+
+<a href="#" class="float-btn">➕ Post Property</a>
+<a href="https://wa.me/919999999999" class="whatsapp">💬</a>
+
+<section style="padding:50px 40px;background:#f2f4f7;">
+    <h2 style="text-align:center;color:#0d47a1;">Frequently Asked Questions</h2>
+    <div class="container">
+        <div class="card">❓ Is PropNest free? <br>✔ Yes, Red plan is completely free.</div><br>
+        <div class="card">❓ When will subscriptions launch? <br>✔ Very soon. Stay tuned!</div><br>
+        <div class="card">❓ Can I sell & rent both? <br>✔ Yes, you can list for either.</div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 PropNest | Smart Property Marketplace</p>
+    <p>CEO & CCO: <strong>Aadi Kadam</strong></p>
+    <p>For any queries, write us at <a href="mailto:propnest@gmail.com" style="color:#bbdefb; text-decoration:none;">propnest@gmail.com</a></p>
+</footer>
+
+<script>
+    function submitProperty() {
+        const owner = document.getElementById('owner').value;
+        const propertyType = document.getElementById('propertyType').value;
+        const purpose = document.getElementById('purpose').value;
+        const plan = document.getElementById('plan').value;
+
+        if (!owner || !propertyType || !purpose || !plan) {
+            alert('Please fill all details');
+            return;
+        }
+
+        let benefits = '';
+        if (plan === 'Red') benefits = 'Basic visibility and standard support';
+        if (plan === 'Silver') benefits = 'Priority support with 1 month ad visibility';
+        if (plan === 'Gold') benefits = 'Top priority listing with long featured ads';
+
+        const output = document.getElementById('output');
+        output.style.display = 'block';
+        output.innerHTML = `
+            <h3>Property Listed Successfully</h3>
+            <p><strong>Owner:</strong> ${owner}</p>
+            <p><strong>Property:</strong> ${propertyType}</p>
+            <p><strong>Purpose:</strong> ${purpose}</p>
+            <p><strong>Plan:</strong> ${plan}</p>
+            <p><strong>Benefits:</strong> ${benefits}</p>
+        `;
+    }
+</script>
+
+</body>
+</html>
